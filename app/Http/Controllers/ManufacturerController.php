@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-
-class Manufacturer extends Controller
+use App\Manufacturer;
+class ManufacturerController extends Controller
 {
 
     /**
@@ -24,11 +24,9 @@ class Manufacturer extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
         try {
-            $manufacturer = \App\Manufacturer::create([
+            $manufacturer = Manufacturer::create([
                 'name' => $request->manufacturerName
             ]);
-
-            dd($manufacturer);
 
             return response()->json([
                 'status' => (bool) $manufacturer,
@@ -40,5 +38,16 @@ class Manufacturer extends Controller
         }
     }
 
+    public function getList(Request $request) {
+        try {
+            $manuf = Manufacturer::all();
+            return response()->json([
+                'status' => (bool) $manuf,
+                'data'   => $manuf
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
 
 }

@@ -58,7 +58,7 @@
                 this.alertType = type,
                 this.alertMessage = msg,
                 this.isAlertActive = true
-                setInterval(() => {
+                setTimeout(() => {
                     this.alertType = '',
                     this.alertMessage = '',
                     this.isAlertActive = false

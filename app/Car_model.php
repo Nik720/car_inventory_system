@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Manufacturer;
+use App\Model_image;
 class Car_model extends Model
 {
     use SoftDeletes;
@@ -14,10 +15,10 @@ class Car_model extends Model
     ];
 
     public function manufacturer() {
-        return $this->belongsTo('App/Manufacturer');
+        return $this->belongsTo(Manufacturer::class);
     }
 
     public function model_images() {
-        return $this->hasMany('App/Model_image', 'car_model_id');
+        return $this->hasMany(Model_image::class, 'car_model_id');
     }
 }

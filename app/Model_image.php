@@ -11,6 +11,6 @@ class Model_image extends Model
     ];
 
     public function car_model() {
-        return $this->belongsTo('App/Car_model');
+        return $this->belongsTo('App/Car_modelController');
     }
 }

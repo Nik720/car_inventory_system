@@ -13,7 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/manufacturer', 'Manufacturer@store');
+Route::post('/manufacturer', 'ManufacturerController@store');
+Route::get('/manufacturer-list', 'ManufacturerController@getList');
+Route::post('/car-model', 'CarModelController@store');
+Route::get('/car-model-list', 'CarModelController@getCarModelList');
+Route::delete('/car-model/{carModel}', 'CarModelController@destroy');
 
 Route::group(['middleware' => 'auth:api'], function(){
 

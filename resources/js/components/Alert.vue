@@ -12,3 +12,13 @@
         props: ['alertMessage', 'alertType']
     }
 </script>
+
+<style scoped>
+    .alert {
+        position: fixed;
+        width: 250px;
+        right: 50px;
+        top: 40px;
+        z-index: 10001;
+    }
+</style>
