@@ -2,89 +2,96 @@
     <div class="row justify-content-center">
         <alert :alert-message="alertMessage" :alert-type="alertType" v-if="isAlertActive"></alert>
         <div class="col-md-10">
-            <div class="addModelForm">
-                <form action="#" id="modelForm" method="POST" @submit="createModel" novalidate >
-                    <div class="row form-group">
-                        <label class="col-md-3">Model Name:</label>
-                        <div class="col-md-9">
-                            <input type="text" :class="'form-control ' + errors.modelName.type" name="modelName" id="modelName" v-model="modelName">
-                            <span class="text-danger">{{  errors.modelName.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="col-md-3">Manufacturer:</label>
-                        <div class="col-md-9">
-                            <select :class="'form-control ' + errors.manufacturer.type" name="manufacturer" id="manufacturer" v-model="manufacturer">
-                                <option value="">Select Manufacturer</option>
-                                <template v-if="manufacturer_list.length > 0">
-                                    <option :value="item.id" v-for="(item, index) in manufacturer_list" :key="index">
-                                        {{ item.name }} {{item.id }}
-                                    </option>
-                                </template>
-                            </select>
-                            <span class="text-danger">{{  errors.manufacturer.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="col-md-3">Color:</label>
-                        <div class="col-md-9">
-                            <input type="text" :class="'form-control ' + errors.color.type" name="color" id="color" v-model="color">
-                            <span class="text-danger">{{  errors.color.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="col-md-3">Manufacturing Year:</label>
-                        <div class="col-md-9">
-                            <input type="text" :class="'form-control ' + errors.manuf_year.type" name="manuf_year" id="manuf_year" v-model="manuf_year">
-                            <span class="text-danger">{{  errors.manuf_year.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="col-md-3">Registration Number:</label>
-                        <div class="col-md-9">
-                            <input type="text" :class="'form-control ' + errors.reg_number.type" name="reg_number" id="reg_number" v-model="reg_number">
-                            <span class="text-danger">{{  errors.reg_number.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="col-md-3">Description:</label>
-                        <div class="col-md-9">
-                            <textarea :class="'form-control ' + errors.note.type" name="note" id="note" v-model="note"></textarea>
-                            <span class="text-danger">{{  errors.note.message }}</span>
-                        </div>
-                    </div>
-
-                    <div class="row form-group" >
-                        <label class="col-md-3">Images:</label>
-                        <div class="col-md-9">
-                            <div class="dropbox" >
-                                <input type="file" multiple
-                                       :name="image"
-                                       :disabled="isSaving"
-                                       @change="onFileChange"
-                                       accept="image/*" class="input-file" id="attachments">
-                                <p v-if="isInitial">
-                                    Drag your file(s) here to begin<br> or click to browse
-                                </p>
-                                <div v-if="attachments.length > 0">
-                                    <img :src="image" v-for="image of attachments" class="img-responsive" width="100px">
+            <div class="card">
+                <div class="card-header">
+                    Add Car Model
+                </div>
+                <div class="card-body">
+                    <div class="addModelForm">
+                        <form action="#" id="modelForm" method="POST" @submit="createModel" novalidate >
+                            <div class="row form-group">
+                                <label class="col-md-3">Model Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" :class="'form-control ' + errors.modelName.type" name="modelName" id="modelName" v-model="modelName">
+                                    <span class="text-danger">{{  errors.modelName.message }}</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row form-group">
-                        <label class="col-md-3"></label>
-                        <div class="col-md-9">
-                            <button class="btn btn-success" type="submit" >Submit</button>
-                        </div>
+                            <div class="row form-group">
+                                <label class="col-md-3">Manufacturer:</label>
+                                <div class="col-md-9">
+                                    <select :class="'form-control ' + errors.manufacturer.type" name="manufacturer" id="manufacturer" v-model="manufacturer">
+                                        <option value="">Select Manufacturer</option>
+                                        <template v-if="manufacturer_list.length > 0">
+                                            <option :value="item.id" v-for="(item, index) in manufacturer_list" :key="index">
+                                                {{ item.name }}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <span class="text-danger">{{  errors.manufacturer.message }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-3">Color:</label>
+                                <div class="col-md-9">
+                                    <input type="text" :class="'form-control ' + errors.color.type" name="color" id="color" v-model="color">
+                                    <span class="text-danger">{{  errors.color.message }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-3">Manufacturing Year:</label>
+                                <div class="col-md-9">
+                                    <input type="text" :class="'form-control ' + errors.manuf_year.type" name="manuf_year" id="manuf_year" v-model="manuf_year">
+                                    <span class="text-danger">{{  errors.manuf_year.message }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-3">Registration Number:</label>
+                                <div class="col-md-9">
+                                    <input type="text" :class="'form-control ' + errors.reg_number.type" name="reg_number" id="reg_number" v-model="reg_number">
+                                    <span class="text-danger">{{  errors.reg_number.message }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-3">Description:</label>
+                                <div class="col-md-9">
+                                    <textarea :class="'form-control ' + errors.note.type" name="note" id="note" v-model="note"></textarea>
+                                    <span class="text-danger">{{  errors.note.message }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" >
+                                <label class="col-md-3">Images:</label>
+                                <div class="col-md-9">
+                                    <div class="dropbox" >
+                                        <input type="file" multiple
+                                               :name="image"
+                                               :disabled="isSaving"
+                                               @change="onFileChange"
+                                               accept="image/*" class="input-file" id="attachments">
+                                        <p v-if="isInitial">
+                                            Drag your file(s) here to begin<br> or click to browse
+                                        </p>
+                                        <div v-if="attachments.length > 0">
+                                            <img :src="image" v-for="image of attachments" class="img-responsive" width="100px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-md-3"></label>
+                                <div class="col-md-9">
+                                    <button class="btn btn-success" type="submit" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

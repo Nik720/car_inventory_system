@@ -1,40 +1,50 @@
 <template>
-    <div>
-        <alert :alert-message="alertMessage" :alert-type="alertType" v-if="isAlertActive"></alert>
-        <b-modal size="lg"  centered  ref="my-modal" hide-footer title="Car Modal Lists" @carModelSold="sellCarModel">
-            <div class="d-block text-center">
-                <car-model-list :model-list="modelList"></car-model-list>
-            </div>
-            <div class="d-block text-right">
-                <b-button class="mt-3" variant="outline-danger" @click="hideModal">Close</b-button>
-            </div>
-        </b-modal>
-        <div v-show="isProcessing" class="loader">Loading...</div>
-        <br>
-        <template>
-            <div class="table-responsive"  v-if="carModels.total > 0">
-                <b-table striped bordered small hover :select-mode="selectMode" :items="carModels.data" :fields="fields" @row-clicked="showCarModels">
-                    <template slot="SN" slot-scope="data">
-                        {{ data.item.id }}
-                    </template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Inventories List
+                    </div>
+                    <div class="card-body">
+                        <alert :alert-message="alertMessage" :alert-type="alertType" v-if="isAlertActive"></alert>
+                        <b-modal small size="lg"  centered  ref="my-modal" hide-footer title="Car Modal Lists" @carModelSold="sellCarModel">
+                            <div class="d-block text-center">
+                                <car-model-list :model-list="modelList"></car-model-list>
+                            </div>
+                            <div class="d-block text-right">
+                                <b-button class="mt-3" variant="outline-danger" @click="hideModal">Close</b-button>
+                            </div>
+                        </b-modal>
+                        <div v-show="isProcessing" class="loader">Loading...</div>
+                        <template>
+                            <div class="table-responsive"  v-if="carModels.total > 0">
+                                <b-table striped bordered small hover :select-mode="selectMode" :items="carModels.data" :fields="fields" @row-clicked="showCarModels">
+                                    <template slot="SN" slot-scope="data">
+                                        {{ data.item.id }}
+                                    </template>
 
-                    <template slot="Model Name" slot-scope="data">
-                        {{ data.item.car_models.length ? data.item.car_models[0]['name'] : '' }}
-                    </template>
+                                    <template slot="Model Name" slot-scope="data">
+                                        {{ data.item.car_models.length ? data.item.car_models[0]['name'] : '' }}
+                                    </template>
 
-                    <template slot="Count" slot-scope="data">
-                        {{ data.item.car_models.length }}
-                    </template>
-                </b-table>
+                                    <template slot="Count" slot-scope="data">
+                                        {{ data.item.car_models.length }}
+                                    </template>
+                                </b-table>
+                            </div>
+
+                            <pagination :data="carModels" @pagination-change-page="loadCarModels"></pagination>
+
+                            <div v-if="carModelsNotAvailable">
+                                <H4>You Don't have Models Yet, Click on <router-link :to="{ name: 'car-model' }">Add Model
+                                </router-link> Link to add car model</H4>
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
-
-            <pagination :data="carModels" @pagination-change-page="loadCarModels"></pagination>
-
-            <div v-if="carModelsNotAvailable">
-                <H4>You Don't have Models Yet, Click on <router-link :to="{ name: 'car-model' }">Add Model
-                </router-link> Link to add car model</H4>
-            </div>
-        </template>
+        </div>
     </div>
 </template>
 

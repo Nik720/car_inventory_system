@@ -13,10 +13,12 @@ class ImageRepository
     public function processUploadImages($request, $model) {
         $images = [];
         foreach ($request->attachments as $photo) {
-            $filename = $photo->store('photos');
+            $newfilename = time()."_".$photo->getClientOriginalName();
+            $photo->move(public_path("/photos"), $newfilename);
+            //$filename = $photo->store('photos');
             $images[] = Model_image::create([
                 'car_model_id' => $model->id,
-                'image_name' => $filename
+                'image_name' => $newfilename
             ]);
         }
         return $images;

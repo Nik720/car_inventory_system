@@ -9,6 +9,13 @@
                 :fields="fields"
                 v-if="modelList.car_models"
         >
+            <template slot="photos" slot-scope="data">
+                <div v-if="data.item.model_images.length > 0">
+                    <a href="" target="_blank" :href="'photos/'+image.image_name" v-for="image of data.item.model_images">
+                        <img :src="image.image_name" alt="" width="80px">
+                    </a>
+                </div>
+            </template>
             <template slot="action" slot-scope="data">
                 <b-button size="sm" @click="soldModel(data.item, data.index, $event.target)" class="mr-1 btn-danger">
                     Sold
@@ -42,6 +49,7 @@
                     {
                         key: 'note',
                     },
+                    'photos',
                     'action'
                 ]
 
